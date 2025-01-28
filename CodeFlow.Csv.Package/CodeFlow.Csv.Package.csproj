@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<PackageId>CodeFlow.Csv.Package</PackageId>
+		<Authors>
+			CodeFlow, CodeFlow Contributors, Nicolas Buscarini
+		</Authors>
+		<Company>CodeFlow</Company>
+		<PackageDescription>A library for CSV helpers</PackageDescription>
+		<RepositoryUrl>https://github.com/CodeFlow-Inc/CodeFlow.Csv.Package</RepositoryUrl>
+		<Nullable>enable</Nullable>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Title>CodeFlow.Csv.Package</Title>
+		<Description>A library for CSV helpers</Description>
+		<AssemblyName>CodeFlow.Csv.Package.</AssemblyName>
+		<Nullable>enable</Nullable>
+		<PackageProjectUrl>https://github.com/CodeFlow-Inc</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageIcon>icon.jpeg</PackageIcon>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\icon.jpeg">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CsvHelper" Version="33.0.1" />
+	</ItemGroup>
+
+</Project>

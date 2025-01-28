@@ -1,0 +1,49 @@
+name: Publish NuGet Package on Push to Main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  Package:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "8.0"
+
+      - name: Add GitHub Packages NuGet source
+        run: dotnet nuget add source --username CodeFlow-Inc --password ${{ secrets.PACKAGES_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/CodeFlow-Inc/index.json"
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build Project
+        run: dotnet build CodeFlow.Csv.Package/CodeFlow.Csv.Package.csproj --configuration Release
+
+      - name: Test NuGet Source
+        run: dotnet nuget list source
+
+      - name: Pack NuGet Package with BuildNumber
+        shell: bash
+        run: |
+          PACK_OUTPUT_DIR="$(pwd)/artifacts"
+          mkdir -p "$PACK_OUTPUT_DIR"
+          dotnet pack "CodeFlow.Csv.Package/CodeFlow.Csv.Package.csproj" \
+            --configuration Release \
+            -o "$PACK_OUTPUT_DIR" \
+            --property:Version="1.1.${{ github.run_number }}"
+
+      - name: Publish NuGet Package
+        shell: bash
+        run: |
+          for nupkg in $(pwd)/artifacts/*.nupkg; do
+            echo "Pushing package $nupkg"
+            dotnet nuget push "$nupkg" --api-key "${{ secrets.PACKAGES_TOKEN }}" --source "github"
+          done
