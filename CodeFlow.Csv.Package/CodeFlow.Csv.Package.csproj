@@ -13,7 +13,7 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Title>CodeFlow.Csv.Package</Title>
 		<Description>A library for CSV helpers</Description>
-		<AssemblyName>CodeFlow.Csv.Package.</AssemblyName>
+		<AssemblyName>CodeFlow.Csv.Package</AssemblyName>
 		<Nullable>enable</Nullable>
 		<PackageProjectUrl>https://github.com/CodeFlow-Inc</PackageProjectUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
