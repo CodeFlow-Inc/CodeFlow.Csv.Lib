@@ -25,7 +25,7 @@ jobs:
         run: dotnet restore
 
       - name: Build Project
-        run: dotnet build CodeFlow.Csv.Package/CodeFlow.Csv.Package.csproj --configuration Release
+        run: dotnet build src/CodeFlow.Csv.Package/CodeFlow.Csv.Package.csproj --configuration Release
 
       - name: Test NuGet Source
         run: dotnet nuget list source
@@ -35,7 +35,7 @@ jobs:
         run: |
           PACK_OUTPUT_DIR="$(pwd)/artifacts"
           mkdir -p "$PACK_OUTPUT_DIR"
-          dotnet pack "CodeFlow.Csv.Package/CodeFlow.Csv.Package.csproj" \
+          dotnet pack "src/CodeFlow.Csv.Package/CodeFlow.Csv.Package.csproj" \
             --configuration Release \
             -o "$PACK_OUTPUT_DIR" \
             --property:Version="1.1.${{ github.run_number }}"
