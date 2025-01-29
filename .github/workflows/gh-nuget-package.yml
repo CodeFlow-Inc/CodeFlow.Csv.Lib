@@ -1,4 +1,4 @@
-name: Publish NuGet Package on Push to Main
+name: Publish NuGet Package on pull-request to master
 
 on:
   pull_request:
