@@ -1,9 +1,8 @@
-name: Publish NuGet Package on Push to Main
+name: Publish NuGet Package on pull-request to master
 
 on:
-  push:
-    branches:
-      - main
+  pull_request:
+    branches: [ "main" ]  
 
 jobs:
   Package:
