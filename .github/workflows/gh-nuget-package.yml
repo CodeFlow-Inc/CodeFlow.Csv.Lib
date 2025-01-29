@@ -2,7 +2,7 @@ name: Publish NuGet Package on pull-request to master
 
 on:
   pull_request:
-    branches: [ "master" ]  
+    branches: [ "main" ]  
 
 jobs:
   Package:
