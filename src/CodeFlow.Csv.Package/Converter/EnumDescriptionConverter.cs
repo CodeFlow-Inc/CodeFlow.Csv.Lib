@@ -13,7 +13,7 @@ namespace CodeFlow.Csv.Package.Converter;
 /// Converts an enum value to and from its description attribute or name.
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public class EnumDescriptionConverterr<T> : DefaultTypeConverter where T : struct, Enum
+public class EnumDescriptionConverter<T> : DefaultTypeConverter where T : struct, Enum
 {
     /// <summary>
     /// Converts a string to an enum value based on the description attribute or name.
@@ -27,20 +27,20 @@ public class EnumDescriptionConverterr<T> : DefaultTypeConverter where T : struc
     {
         ArgumentNullException.ThrowIfNull(text);
 
-        string normalizedText = EnumDescriptionConverterr<T>.NormalizeString(text);
+        string normalizedText = EnumDescriptionConverter<T>.NormalizeString(text);
 
         foreach (var field in typeof(T).GetFields())
         {
             if (field != null && Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) is DescriptionAttribute attribute)
             {
-                if (EnumDescriptionConverterr<T>.NormalizeString(attribute.Description) == normalizedText)
+                if (EnumDescriptionConverter<T>.NormalizeString(attribute.Description) == normalizedText)
                 {
                     return (T)field.GetValue(null)!;
                 }
             }
             else
             {
-                if (field != null && EnumDescriptionConverterr<T>.NormalizeString(field.Name) == normalizedText)
+                if (field != null && EnumDescriptionConverter<T>.NormalizeString(field.Name) == normalizedText)
                 {
                     return (T)field.GetValue(null)!;
                 }
